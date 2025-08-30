@@ -64,7 +64,7 @@
             animation: glow 2s ease-in-out infinite;
         }
         
-        /* Glass effects - konsisten dengan index */
+        /* Glass effects */
         .glass {
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -112,9 +112,10 @@
         
         .btn-hover:hover {
             transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
         
-        /* Background overlay - konsisten dengan index */
+        /* Background overlay */
         .bg-overlay {
             background: linear-gradient(135deg, 
                 rgba(0, 0, 0, 0.4) 0%, 
@@ -126,11 +127,12 @@
         
         /* Particle effect */
         .particle {
-            position: absolute;
+            position: fixed;
             background: rgba(255, 192, 203, 0.6);
             border-radius: 50%;
             pointer-events: none;
             animation: particle-float 6s linear infinite;
+            z-index: 5;
         }
         
         @keyframes particle-float {
@@ -152,99 +154,102 @@
     </style>
 </head>
 
-<body class="min-h-screen relative overflow-auto bg-cover bg-center bg-no-repeat" 
+<body class="min-h-screen relative bg-cover bg-center bg-no-repeat bg-fixed" 
       style="background-image: url('/asset/ddanik.jpg');">
     
     <!-- Background overlay -->
-    <div class="absolute inset-0 bg-overlay"></div>
+    <div class="fixed inset-0 bg-overlay"></div>
     
     <!-- Floating particles -->
-    <div id="particles"></div>
+    <div id="particles" class="fixed inset-0 pointer-events-none z-5"></div>
     
     <!-- Header -->
-    <header class="absolute top-0 left-0 w-full p-4 md:p-6 z-20">
-        <div class="glass rounded-2xl p-4 mx-4 md:mx-8 shadow-md">
+    <header class="fixed top-0 left-0 w-full p-3 sm:p-4 md:p-6 z-20">
+        <div class="glass rounded-xl sm:rounded-2xl p-3 sm:p-4 mx-2 sm:mx-4 md:mx-8 shadow-md">
             <div class="container mx-auto text-center">
-                <p class="font-playfair text-sm sm:text-base md:text-lg lg:text-xl text-[#8B4513] tracking-wider animate-float">
+                <p class="font-playfair text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-[#8B4513] tracking-wider animate-float">
                     🌟 Sebuah perjalanan yang penuh makna 🌟
                 </p>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="min-h-screen flex items-center justify-center py-24">
-        <main class="relative z-10 glass-content rounded-2xl p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 text-center max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl w-full mx-4 shadow-2xl hover-glow opacity-0 transform translate-y-8">
-        
-        <!-- Subtitle -->
-        <h2 class="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl tracking-widest uppercase mb-4 font-light">
-            Petualangan Dimulai
-        </h2>
-        
-        <!-- Main title -->
-        <h1 class="font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#8B4513] my-6 md:my-8 leading-tight font-bold animate-glow">
-            Cerita<br>Berlanjut
-        </h1>
-        
-        <!-- Content paragraphs -->
-        <div class="text-gray-700 text-sm sm:text-base md:text-lg lg:text-lg mb-8 md:mb-12 max-w-lg mx-auto space-y-6 leading-relaxed">
-            <p class="opacity-0 paragraph-1 text-justify">
-                Setiap tindakan kebaikan yang kamu lakukan, sekecil apa pun itu, meninggalkan jejak yang tak terlihat namun sangat berarti dalam kehidupan orang lain. Kamu mungkin tidak menyadarinya, tetapi senyumanmu dapat mengubah hari seseorang dari kelabu menjadi cerah, dan kata-katamu yang penuh pengertian dapat memberikan kekuatan kepada mereka yang sedang rapuh.
-            </p>
+    <!-- Main Content Container -->
+    <div class="flex flex-col min-h-screen relative z-10">
+        <!-- Main Content -->
+        <div class="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 md:pt-28 pb-20">
+            <main class="glass-content rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16 text-center w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl shadow-2xl hover-glow opacity-0 transform translate-y-8">
             
-            <p class="opacity-0 paragraph-2 text-justify">
-                Dalam setiap pilihan untuk peduli, kamu membangun jembatan antara hati yang terluka dan penyembuhan. Kemampuanmu untuk melihat nilai dalam setiap individu dan merespons dengan kasih membuat dunia ini menjadi tempat yang lebih hangat dan ramah. Kamu mengingatkan kita semua bahwa kemanusiaan terletak pada bagaimana kita memperlakukan satu sama lain.
-            </p>
-            
-            <p class="opacity-0 paragraph-3 text-justify">
-                Teruslah menjadi pribadi yang penuh empati dan kepedulian. Dunia membutuhkan lebih banyak orang sepertimu yang membawa terang dalam kegelapan dan harapan dalam kesulitan. Perjalananmu masih panjang, dan setiap langkah yang kamu ambil dengan hati akan terus menciptakan dampak positif yang berlangsung lama.
-            </p>
-        </div>
-        
-        <!-- Navigation buttons -->
-        <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-            <!-- Back button -->
-            <a href="/halamanlanjutan.html" 
-               class="bg-[#D2B48C] text-white font-bold py-3 px-8 sm:py-3 sm:px-10 lg:py-4 lg:px-12 rounded-full shadow-lg hover:bg-[#C1A074] btn-hover">
-                <span class="relative z-10 tracking-wide text-sm sm:text-base">
-                    ← KEMBALI
-                </span>
-            </a>
+                <!-- Subtitle -->
+                <h2 class="text-gray-600 text-xs sm:text-sm md:text-base lg:text-lg tracking-widest uppercase mb-3 sm:mb-4 font-light">
+                    Petualangan Dimulai
+                </h2>
+                
+                <!-- Main title -->
+                <h1 class="font-playfair text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-[#8B4513] my-4 sm:my-6 md:my-8 leading-tight font-bold animate-glow">
+                    Cerita<br>Berlanjut
+                </h1>
+                
+                <!-- Content paragraphs -->
+                <div class="text-gray-700 text-xs sm:text-sm md:text-base lg:text-lg mb-6 sm:mb-8 md:mb-10 lg:mb-12 max-w-full space-y-3 sm:space-y-4 md:space-y-6 leading-relaxed">
+                    <p class="opacity-0 paragraph-1 text-justify">
+                        Setiap tindakan kebaikan yang kamu lakukan, sekecil apa pun itu, meninggalkan jejak yang tak terlihat namun sangat berarti dalam kehidupan orang lain. Kamu mungkin tidak menyadarinya, tetapi senyumanmu dapat mengubah hari seseorang dari kelabu menjadi cerah, dan kata-katamu yang penuh pengertian dapat memberikan kekuatan kepada mereka yang sedang rapuh.
+                    </p>
+                    
+                    <p class="opacity-0 paragraph-2 text-justify">
+                        Dalam setiap pilihan untuk peduli, kamu membangun jembatan antara hati yang terluka dan penyembuhan. Kemampuanmu untuk melihat nilai dalam setiap individu dan merespons dengan kasih membuat dunia ini menjadi tempat yang lebih hangat dan ramah. Kamu mengingatkan kita semua bahwa kemanusiaan terletak pada bagaimana kita memperlakukan satu sama lain.
+                    </p>
+                    
+                    <p class="opacity-0 paragraph-3 text-justify">
+                        Teruslah menjadi pribadi yang penuh empati dan kepedulian. Dunia membutuhkan lebih banyak orang sepertimu yang membawa terang dalam kegelapan dan harapan dalam kesulitan. Perjalananmu masih panjang, dan setiap langkah yang kamu ambil dengan hati akan terus menciptakan dampak positif yang berlangsung lama.
+                    </p>
+                </div>
+                
+               <!-- Navigation buttons -->
+                <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 md:gap-6">
+                    <!-- Back button -->
+                    <a href="/halamanlanjutan.html" 
+                       class="bg-gradient-to-r from-amber-600 to-orange-500 text-white font-semibold py-2.5 sm:py-3 px-6 sm:px-8 md:px-10 lg:px-12 rounded-full shadow-lg btn-hover w-full sm:w-auto">
+                        <span class="relative z-10 tracking-wide text-xs sm:text-sm md:text-base">
+                            ← KEMBALI
+                        </span>
+                    </a>
 
-            <!-- Next button -->
-            <a href="/halamanfoto.html" 
-               class="bg-[#4CAF50] text-white font-bold py-3 px-8 sm:py-3 sm:px-10 lg:py-4 lg:px-12 rounded-full shadow-lg hover:bg-[#43A047] btn-hover">
-                <span class="relative z-10 tracking-wide text-sm sm:text-base">
-                    SELANJUTNYA →
-                </span>
-            </a>
+                    <!-- Next button -->
+                    <a href="/halamanfoto.html" 
+                       class="bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-2.5 sm:py-3 px-6 sm:px-8 md:px-10 lg:px-12 rounded-full shadow-lg btn-hover w-full sm:w-auto">
+                        <span class="relative z-10 tracking-wide text-xs sm:text-sm md:text-base">
+                            SELANJUTNYA →
+                        </span>
+                    </a>
+                </div>
+                
+                <!-- Decorative element -->
+                <div class="mt-6 sm:mt-8 opacity-60">
+                    <p class="text-gray-600 text-xs sm:text-sm font-light italic">
+                        ✨ "Perjalanan terbaik adalah ketika kita menemukan diri kita sendiri" ✨
+                    </p>
+                </div>
+                
+            </main>
         </div>
-        
-        <!-- Decorative element -->
-        <div class="mt-8 opacity-60">
-            <p class="text-gray-600 text-xs sm:text-sm font-light italic">
-                ✨ "Perjalanan terbaik adalah ketika kita menemukan diri kita sendiri" ✨
-            </p>
-        </div>
-        
-    </main>
+
+        <!-- Footer -->
+        <footer class="relative z-20 pb-4 sm:pb-6">
+            <div class="text-center px-4">
+                <p class="text-white/70 text-xs sm:text-sm font-light">
+                    💖 Dengan penuh cinta dan apresiasi 💖
+                </p>
+            </div>
+        </footer>
     </div>
-
-    <!-- Footer -->
-    <footer class="absolute bottom-4 left-0 w-full z-20">
-        <div class="text-center">
-            <p class="text-white/70 text-xs sm:text-sm font-light">
-                💖 Dengan penuh cinta dan apresiasi 💖
-            </p>
-        </div>
-    </footer>
 
     <!-- JavaScript -->
     <script>
         // Fade in main content and paragraphs
         document.addEventListener('DOMContentLoaded', function() {
             const mainContent = document.querySelector('main');
-            const paragraphs = document.querySelectorAll('.space-y-6 p');
+            const paragraphs = document.querySelectorAll('.space-y-3 p, .space-y-4 p, .space-y-6 p');
             
             // Fade in main content first
             setTimeout(() => {
@@ -263,7 +268,7 @@
             });
         });
         
-        // Create floating particles - konsisten dengan index
+        // Create floating particles
         function createParticle() {
             const particle = document.createElement('div');
             particle.className = 'particle';
@@ -295,7 +300,7 @@
             setTimeout(createParticle, i * 200);
         }
         
-        // Add sparkle effect on mouse move - konsisten dengan index
+        // Add sparkle effect on mouse move
         document.addEventListener('mousemove', function(e) {
             if (Math.random() > 0.9) {
                 const sparkle = document.createElement('div');
