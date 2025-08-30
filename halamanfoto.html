@@ -12,10 +12,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
-        /* Menambahkan font kustom ke Tailwind */
         body {
             font-family: 'Poppins', sans-serif;
         }
@@ -23,11 +22,11 @@
             font-family: 'Playfair Display', serif;
         }
         
-        /* Custom animations for paragraphs */
+        /* Custom animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -35,146 +34,407 @@
             }
         }
         
-        .animate-fade-in-up {
-            animation: fadeInUp 0.6s ease-out forwards;
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
         }
         
-        /* Custom hover effects */
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(139, 69, 19, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(139, 69, 19, 0.5), 0 0 30px rgba(139, 69, 19, 0.3);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        /* Glass effects - konsisten dengan index */
+        .glass {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(234, 224, 213, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-content {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Hover effects */
         .hover-glow {
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .hover-glow:hover {
             transform: scale(1.02);
-            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.2);
+            box-shadow: 0 15px 35px rgba(139, 69, 19, 0.2);
         }
         
-        /* Custom button hover effect */
         .btn-hover {
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-hover:hover::before {
+            left: 100%;
         }
         
         .btn-hover:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05) translateY(-2px);
+        }
+        
+        /* Background overlay - konsisten dengan index */
+        .bg-overlay {
+            background: linear-gradient(135deg, 
+                rgba(0, 0, 0, 0.4) 0%, 
+                rgba(139, 69, 19, 0.3) 25%, 
+                rgba(0, 0, 0, 0.4) 50%, 
+                rgba(139, 69, 19, 0.3) 75%, 
+                rgba(0, 0, 0, 0.4) 100%);
         }
         
         /* Photo gallery styles */
         .photo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
             margin-top: 2rem;
         }
         
         @media (min-width: 640px) {
             .photo-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
             }
         }
         
         @media (min-width: 1024px) {
             .photo-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
             }
         }
         
         .photo-item {
-            border-radius: 0.5rem;
+            border-radius: 1rem;
             overflow: hidden;
-            background-color: #EAE0D5;
+            background: rgba(234, 224, 213, 0.8);
             aspect-ratio: 1/1;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
         }
         
         .photo-item:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
         }
         
         .photo-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-item:hover img {
+            transform: scale(1.1);
         }
         
         .photo-item .placeholder {
-            font-size: 3rem;
+            font-size: 2rem;
             color: #8B4513;
+            opacity: 0.6;
+        }
+        
+        /* Featured photo styles */
+        .featured-photo {
+            max-width: 300px;
+            aspect-ratio: 4/5;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(139, 69, 19, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.4s ease;
+        }
+        
+        .featured-photo:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 50px rgba(139, 69, 19, 0.3);
+        }
+        
+        .featured-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Particle effect */
+        .particle {
+            position: absolute;
+            background: rgba(255, 192, 203, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particle-float 6s linear infinite;
+        }
+        
+        @keyframes particle-float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
-<body class="bg-[#FDF5E6] min-h-screen flex items-center justify-center p-4 md:p-8 overflow-hidden relative">
+
+<body class="min-h-screen relative overflow-auto bg-cover bg-center bg-no-repeat" 
+      style="background-image: url('/asset/ddanik.jpg');">
+    
+    <!-- Background overlay -->
+    <div class="absolute inset-0 bg-overlay"></div>
+    
+    <!-- Floating particles -->
+    <div id="particles"></div>
     
     <!-- Header -->
-    <header class="absolute top-0 left-0 w-full p-4 md:p-6 z-20 bg-[#EAE0D5]/70 backdrop-blur-sm shadow-md">
-        <div class="container mx-auto text-center">
-            <p class="font-playfair text-lg sm:text-xl lg:text-2xl text-[#8B4513] tracking-wider">Kenangan yang Abadi</p>
+    <header class="absolute top-0 left-0 w-full p-4 md:p-6 z-20">
+        <div class="glass rounded-2xl p-4 mx-4 md:mx-8 shadow-md">
+            <div class="container mx-auto text-center">
+                <p class="font-playfair text-sm sm:text-base md:text-lg lg:text-xl text-[#8B4513] tracking-wider animate-float">
+                    📸 Kenangan yang Abadi dalam Hati 📸
+                </p>
+            </div>
         </div>
     </header>
 
-    <!-- Konten Utama / Frame -->
-    <main class="relative z-10 bg-white/60 backdrop-blur-sm p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 rounded-2xl shadow-2xl text-center max-w-lg xl:max-w-xl w-full border border-white/30">
-        
-        <h2 class="text-gray-600 text-base sm:text-lg md:text-xl lg:text-2xl tracking-widest uppercase">
-            Galeri Kenangan
-        </h2>
-        
-        <h1 class="font-playfair text-1xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-[#8B4513] my-4 leading-tight">
-            Momen<br>Istimewa
-        </h1>
-        
-        <p class="text-gray-700 text-sm sm:text-base lg:text-lg mb-8 max-w-sm mx-auto">
-            "Setiap foto adalah kenangan yang tak terlupakan. Mari kita lihat kembali momen indah yang telah terlewati."
-        </p>
-        
-        <!-- Photo Gallery -->
-        <!-- Photo items - these would be replaced with actual photos in a real implementation -->
-        <div class="w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden shadow-lg mx-auto">
-            <img src="asset/ddanik_sidang.jpg" 
-            alt="ddanik_sidang" 
-            class="w-full h-full object-cover">
+    <!-- Main Content -->
+    <div class="min-h-screen flex items-center justify-center py-24">
+        <main class="relative z-10 glass-content rounded-2xl p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 text-center max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl w-full mx-4 shadow-2xl hover-glow opacity-0 transform translate-y-8">
+            
+            <!-- Subtitle -->
+            <h2 class="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl tracking-widest uppercase mb-4 font-light">
+                Galeri Kenangan
+            </h2>
+            
+            <!-- Main title -->
+            <h1 class="font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#8B4513] my-6 md:my-8 leading-tight font-bold animate-glow">
+                Momen<br>Istimewa
+            </h1>
+            
+            <!-- Intro paragraph -->
+            <div class="mb-8 opacity-0 intro-text">
+                <p class="text-gray-700 text-sm sm:text-base md:text-lg lg:text-lg leading-relaxed max-w-lg mx-auto">
+                    "Setiap foto adalah kenangan yang tak terlupakan. Mari kita lihat kembali momen indah yang telah terlewati dan merayakan perjalanan hidup yang penuh makna."
+                </p>
+            </div>
+            
+            <!-- Featured Photo -->
+            <div class="flex justify-center mb-8 opacity-0 featured-image">
+                <div class="featured-photo">
+                    <img src="/asset/ddanik_sidang.jpg" 
+                         alt="Momen Istimewa dd Anik" 
+                         class="w-full h-full object-cover">
+                </div>
+            </div>
+            
+            <!-- Photo Gallery Grid -->
+            <!-- <div class="photo-grid opacity-0 gallery-grid"> -->
+                <!-- Photo placeholders - dalam implementasi nyata akan diganti dengan foto asli -->
+                <!-- <div class="photo-item">
+                    <div class="placeholder">📷</div>
+                </div>
+                <div class="photo-item">
+                    <div class="placeholder">🎉</div>
+                </div>
+                <div class="photo-item">
+                    <div class="placeholder">💕</div>
+                </div>
+                <div class="photo-item">
+                    <div class="placeholder">🌟</div>
+                </div>
+                <div class="photo-item">
+                    <div class="placeholder">🎂</div>
+                </div>
+                <div class="photo-item">
+                    <div class="placeholder">✨</div>
+                </div>
+            </div> -->
+            
+            <!-- Closing message -->
+            <div class="mt-8 mb-8 opacity-0 closing-text">
+                <p class="text-gray-600 text-xs sm:text-sm md:text-base font-light italic leading-relaxed">
+                    💝 "Terima kasih telah menjadi bagian dari cerita indah ini" 💝
+                </p>
+            </div>
+            
+            <!-- Navigation buttons -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 opacity-0 nav-buttons">
+                <!-- Back button -->
+                <a href="/halamanlanjutan2.html" 
+                   class="bg-[#D2B48C] text-white font-bold py-3 px-8 sm:py-3 sm:px-10 lg:py-4 lg:px-12 rounded-full shadow-lg hover:bg-[#C1A074] btn-hover">
+                    <span class="relative z-10 tracking-wide text-sm sm:text-base">
+                        ← KEMBALI
+                    </span>
+                </a>
+
+                <!-- Finish button -->
+                <a href="/index.html" 
+                   class="bg-[#4CAF50] text-white font-bold py-3 px-8 sm:py-3 sm:px-10 lg:py-4 lg:px-12 rounded-full shadow-lg hover:bg-[#43A047] btn-hover">
+                    <span class="relative z-10 tracking-wide text-sm sm:text-base">
+                        SELESAI 🎉
+                    </span>
+                </a>
+            </div>
+            
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="absolute bottom-4 left-0 w-full z-20">
+        <div class="text-center">
+            <p class="text-white/70 text-xs sm:text-sm font-light">
+                🎈 Semoga hari ini dan selamanya penuh kebahagiaan 🎈
+            </p>
         </div>
+    </footer>
 
-
-        
-        <div class="flex justify-between mt-8">
-            <!-- Tombol Kembali -->
-            <a href="/index.html" class="bg-[#D2B48C] text-white font-bold py-2 px-6 sm:py-3 sm:px-8 lg:py-4 lg:px-10 rounded-full shadow-lg hover:bg-[#C1A074] transition-transform transform hover:scale-105 duration-300 ease-in-out btn-hover">
-                KEMBALI
-            </a>
-
-            <!-- Tombol Selesai -->
-            <a href="/halamanlanjutan.html" class="bg-[#4CAF50] text-white font-bold py-2 px-6 sm:py-3 sm:px-8 lg:py-4 lg:px-10 rounded-full shadow-lg hover:bg-[#43A047] transition-transform transform hover:scale-105 duration-300 ease-in-out btn-hover">
-                SELESAI
-            </a>
-        </div>
-        
-    </main>
-
-    <!-- Custom JavaScript -->
+    <!-- JavaScript -->
     <script>
-        // Add fade-in animation to main content when the page loads
+        // Sequential animation for all elements
         document.addEventListener('DOMContentLoaded', function() {
             const mainContent = document.querySelector('main');
-            mainContent.style.opacity = '0';
-            mainContent.style.transform = 'translateY(20px)';
-            mainContent.classList.add('animate-fade-in-up');
+            const introText = document.querySelector('.intro-text');
+            const featuredImage = document.querySelector('.featured-image');
+            const galleryGrid = document.querySelector('.gallery-grid');
+            const closingText = document.querySelector('.closing-text');
+            const navButtons = document.querySelector('.nav-buttons');
             
-            // Add hover effect to main content area
-            mainContent.classList.add('hover-glow');
+            // Animation sequence
+            const elements = [mainContent, introText, featuredImage, galleryGrid, closingText, navButtons];
             
-            // Add click effect to photo items
-            const photoItems = document.querySelectorAll('.photo-item');
-            photoItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    // In a real implementation, this would show a larger version of the photo
-                    alert('Dalam implementasi nyata, ini akan menampilkan foto yang lebih besar.');
-                });
+            elements.forEach((element, index) => {
+                if (element) {
+                    setTimeout(() => {
+                        element.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, 300 + (index * 300));
+                }
+            });
+        });
+        
+        // Create floating particles - konsisten dengan index
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Random size
+            const size = Math.random() * 6 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            
+            // Random position
+            particle.style.left = Math.random() * 100 + '%';
+            
+            // Random delay
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            
+            document.getElementById('particles').appendChild(particle);
+            
+            // Remove particle after animation
+            setTimeout(() => {
+                particle.remove();
+            }, 6000);
+        }
+        
+        // Create particles periodically
+        setInterval(createParticle, 800);
+        
+        // Initial particles
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createParticle, i * 200);
+        }
+        
+        // Add sparkle effect on mouse move - konsisten dengan index
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() > 0.9) {
+                const sparkle = document.createElement('div');
+                sparkle.innerHTML = '✨';
+                sparkle.style.position = 'fixed';
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.fontSize = '12px';
+                sparkle.style.zIndex = '1000';
+                sparkle.style.transition = 'all 1s ease-out';
+                
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.style.transform = 'translateY(-50px)';
+                    sparkle.style.opacity = '0';
+                }, 50);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1000);
+            }
+        });
+        
+        // Photo gallery interactions
+        document.querySelectorAll('.photo-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // Simple click feedback
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
             });
         });
     </script>
