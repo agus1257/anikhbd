@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Halaman Selanjutnya</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Menambahkan font kustom ke Tailwind */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Custom animations for paragraphs */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        /* Custom hover effects */
+        .hover-glow {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-glow:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.2);
+        }
+        
+        /* Custom button hover effect */
+        .btn-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hover:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-[#FDF5E6] min-h-screen flex items-center justify-center p-4 md:p-8 overflow-auto relative">
+
+    
+    <!-- Header -->
+<header class="absolute top-0 left-0 w-full p-4 md:p-6 z-20 bg-[#EAE0D5]/70 backdrop-blur-sm shadow-md">
+        <div class="container mx-auto text-center">
+<p class="font-playfair text-lg sm:text-xl lg:text-2xl text-[#8B4513] tracking-wider">Sebuah perjalanan yang penuh makna</p>
+        </div>
+    </header>
+
+    <!-- Konten Utama / Frame -->
+<main class="relative z-10 bg-white/60 backdrop-blur-sm p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 rounded-2xl shadow-2xl text-center max-w-lg xl:max-w-xl w-full border border-white/30">
+        
+<h2 class="text-gray-600 text-base sm:text-lg md:text-xl lg:text-2xl tracking-widest uppercase">
+            Petualangan Dimulai
+        </h2>
+        
+<h1 class="font-playfair text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl text-[#8B4513] my-4 leading-tight">
+            <!-- Judul halaman selanjutnya -->
+            Momen<br>Istimewa
+        </h1>
+        
+<div class="text-gray-700 text-sm sm:text-base lg:text-lg mb-8 max-w-sm mx-auto space-y-4 text-justify">
+            <p>
+                Dalam dunia yang seringkali terasa dingin dan tergesa-gesa, kepedulianmu adalah cahaya hangat yang menerangi hari-hari orang di sekitarmu. Kamu tidak hanya melihat, tetapi kamu benar-benar memahami perasaan orang lain. Setiap senyum yang kamu berikan, setiap kata yang kamu ucapkan, dan setiap tindakan kebaikan yang kamu lakukan adalah bukti bahwa kamu memiliki hati yang tulus dan penuh kasih sayang.
+            </p>
+            
+            <p>
+                Empati yang kamu miliki bukanlah hal yang biasa. Kamu mampu merasakan kesedihan orang lain seolah-olah itu adalah kesedihanmu sendiri, dan kamu juga merayakan kebahagiaan mereka dengan tulus. Kemampuanmu untuk memahami dan merespons emosi orang lain membuatmu menjadi pribadi yang sangat berharga. Dunia ini membutuhkan lebih banyak orang seperti kamu, yang membawa kebaikan tanpa pamrih.
+            </p>
+            
+            <p>
+                Semoga kamu selalu menjaga kepedulian dan empati yang luar biasa ini. Jangan pernah meragukan kekuatan perasaanmu, karena dengan hati yang penuh kasih, kamu mampu membuat perbedaan besar dalam hidup orang lain. Kamu adalah contoh nyata bahwa kebaikan masih ada di dunia ini, dan kehadiranmu memberikan harapan serta kehangatan bagi semua yang beruntung mengenalmu.
+            </p>
+        </div>
+        
+       <div class="flex justify-between mt-6">
+    <!-- Tombol Kembali -->
+<a href="/" class="bg-[#D2B48C] text-white font-bold py-2 px-6 sm:py-3 sm:px-8 lg:py-4 lg:px-10 rounded-full shadow-lg hover:bg-[#C1A074] transition-transform transform hover:scale-105 duration-300 ease-in-out btn-hover">
+        KEMBALI
+    </a>
+
+    <!-- Tombol Selanjutnya -->
+    <a href="/halamanlanjutan2.html" class="bg-[#4CAF50] text-white font-bold py-2 px-6 sm:py-3 sm:px-8 lg:py-4 lg:px-10 rounded-full shadow-lg hover:bg-[#43A047] transition-transform transform hover:scale-105 duration-300 ease-in-out btn-hover">
+        SELANJUTNYA
+    </a>
+</div>
+        
+    </main>
+
+<!-- Custom JavaScript -->
+<script>
+    // Add fade-in animation to paragraphs when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        const paragraphs = document.querySelectorAll('.space-y-4 p');
+        paragraphs.forEach((p, index) => {
+            p.style.opacity = '0';
+            p.style.transform = 'translateY(20px)';
+            p.classList.add('animate-fade-in-up');
+            p.style.animationDelay = `${index * 0.2}s`;
+        });
+        
+        // Add hover effect to main content area
+        const mainContent = document.querySelector('main');
+        mainContent.classList.add('hover-glow');
+    });
+</script>
+
+</body>
+</html>
